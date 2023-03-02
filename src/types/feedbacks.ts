@@ -1,7 +1,7 @@
 export type ISort = 'comments' | 'upvotes';
 export type ICategory = 'All' | 'UI' | 'UX' | 'Enhancement' | 'Bug' | 'Feature';
-export type IStatus = 'Planned' | 'Suggestion' | 'In-Progress' | 'Live';
 export type IOrder = 'asc' | 'desc';
+export type IStatus = 'Planned' | 'Suggestion' | 'In-Progress' | 'Live';
 
 export interface IFilterOptions {
   sort: ISort;

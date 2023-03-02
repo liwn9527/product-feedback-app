@@ -1,22 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { fetchOptions, fetchBody, endpoint } from '@/constant/fetchConfig';
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const fetchOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        // TODO what is this?
-        'Access-Control-Request-Headers': '*',
-        'api-key': process.env.MONGODB_API_KEY as string,
-      },
-    };
-    const fetchBody = {
-      dataSource: 'Cluster0',
-      database: 'product_feedback',
-      collection: 'feedback',
-    };
-    const endpoint = `${process.env.MONGODB_URL_ENDPOINT}/action`;
     let resJson;
 
     switch (req.method) {

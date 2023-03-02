@@ -1,7 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-
-import fetcher from '@/helpers/fetcher';
-import { IFeedback, IFilterOptions } from '@/types/feedbacks';
+import useFeedbacksQuery from '@/helpers/useFeedbacksQuery';
+import { IFilterOptions } from '@/types/feedbacks';
 
 import FeedbackItem from './FeedbackItem';
 
@@ -10,16 +8,11 @@ interface FeedbacksListProps {
 }
 
 export default function FeedbacksList({ filterOptions }: FeedbacksListProps) {
-  const feedbacksQuery = useQuery<IFeedback[]>(
-    ['feedbacks', { ...filterOptions }],
-    fetcher(`/api/feedbacks?s=${filterOptions.sort}&o=${filterOptions.order}&c=${filterOptions.category}`),
-  );
+  const feedbacksQuery = useFeedbacksQuery(filterOptions);
 
   return (
     <div>
-      {feedbacksQuery.isLoading ? (
-        <p>Loading...</p>
-      ) : (
+      {feedbacksQuery.isLoading ? null : (
         <ul>
           {feedbacksQuery.data?.map((feedback) => (
             <FeedbackItem key={feedback.id} feedback={feedback} />
